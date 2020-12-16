@@ -1,66 +1,23 @@
-import React from "react";
-import { isAuthenticated, logout } from "../../services/auth";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { isAuthenticated, userAuth } from '../../services/auth';
 
-export default function Navbar() {
-  return (
+// import { Container } from './styles';
 
-    <nav className="navbar navbar-expand navbar-dark bg-warning mb-5">
-      <a className="navbar-brand" href="/">
-        Oficina5
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarsExample02"
-        aria-controls="navbarsExample02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <div className="collapse navbar-collapse" id="navbarsExample02">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="/">
-              Inicio
-            </a>
-          </li>
-          <li className="nav-item active">
-            <a className="nav-link" href="/posts">
-              Postagens
-            </a>
-          </li>
-
-          {isAuthenticated() === false ? (
-            <>
-              <li className="nav-item active">
-                <a className="nav-link" href="/login">
-                  Entrar
-                </a>
-              </li>
-
-              <li className="nav-item active">
-                <a className="nav-link" href="/register">
-                  Criar Conta
-                </a>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="nav-item active">
-                <span
-                  className="btn btn-link nav-link"
-                  onClick={() => logout()}
-                >
-                  Sair
-                </span>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
-    </nav>
-  );
+function Navbar() {
+    return (
+        <div className="nav-scroller py-1 mb-2">
+            <nav className="nav d-flex justify-content-between">
+                <Link className="p-2 link-secondary" to="/">Home</Link>
+                <Link className="p-2 link-secondary" to="/about">About</Link>
+                {isAuthenticated() && <>
+                    <Link className="p-2 link-secondary" to="/posts">My entries</Link>
+                    <Link className="p-2 link-secondary" to="/posts/new">Write new entry</Link>
+                    <p className="p-2 link-secondary">Welcome, {userAuth?.name}</p>
+                </>}
+            </nav>
+        </div>
+    );
 }
+
+export default Navbar;

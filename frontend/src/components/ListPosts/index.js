@@ -1,44 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function ListPosts({ posts }) {
   return (
-    <>
-      <div className="container">
-        <h3>Lista de Postagens</h3>
-        <div className="row">
-          {posts.length
-            ? posts.map((post, i) => (
-                <div key={i} className="col-sm-6 col-md-4">
-                  <div className="card p-2 m-2" style={{ width: "100%" }}>
-                    <div className="card-body">
-                      <h5 className="card-title">{post.title}</h5>
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        {post.user.username}
-                      </h6>
-                      <p className="card-text">{post.body}</p>
-                      <ul className="list-group">
-                        <li className="list-group-item text-right">
-                          <span className="float-left">
-                            <strong>Comentários</strong>
-                          </span>
-                          {post.comments.length}
-                        </li>
+    <article className="container blog-post">
+      <h1 className="mb-3 fw-normal">Posts List</h1>
+      <hr />
+      <div className="row mb-2">
 
-                        {post.comments.map((comment, i) => {
-                          return (
-                            <li key={i} className="list-group-item small">
-                              <small>{comment.body}</small>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ))
-            : ""}
-        </div>
+        {posts.length ? posts.map((item, key) => (
+          <div className="col-md-3" key={key}>
+            <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div className="col p-4 d-flex flex-column position-static">
+                <h4 className="mb-0" style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{item?.title}</h4>
+                <div className="mb-1 text-muted">{item?.created_at}</div>
+                <p className="card-text mb-auto" style={{ textOverflow: 'ellipsis', overflow: 'hidden', wordBreak: 'break-all' }}>{item?.body?.substring(0,80)}</p>
+                <strong className="d-inline-block mb-2 text-primary">Author: {item?.user?.name}</strong>
+                <Link to={`/posts/${item?.id}`} className="stretched-link">Continue reading</Link>
+              </div>
+            </div>
+          </div>
+        )) : <p className="lead mt-5">No records found.</p>}
+
       </div>
-    </>
+    </article>
   );
 }
