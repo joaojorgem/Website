@@ -4,11 +4,11 @@ const { v4: uuid } = require('uuid');
 const bcrypt = require('bcrypt');
 
 class UserSchema {
-    constructor(data) {
+   constructor(data) {
         this.id = uuid();
-        this.name = data?.name;
-        this.email = data?.email;
-        this.password = bcrypt.hashSync(data?.password, 8); // requesting crypt password 
+        this.name = data.name;
+        this.email = data.email;
+        this.password = bcrypt.hashSync(data.password.toString(), 8); // requesting crypt password 
     }
 }
 
