@@ -14,7 +14,7 @@ export default function Login({ props }) {
       .then(({ data }) => {
         login(data);
       })
-      .catch(error => Swal.fire("Error!", error.response.data || error.message, "error"));
+      .catch(error => Swal.fire("Error!" || error.message, "Email or Password not found !"));
   }
 
   return (
