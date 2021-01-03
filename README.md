@@ -12,4 +12,6 @@ To initialize the front and back end, follow the steps:
 - Go to the "\frontend\src\api.js" file and change the field  "baseURL:" for the URL 
 created on your browser when the application is started;
 
+- Select "Open Browser" on port 3000 to open the application;
+
 - The application is ready to be used!;
